@@ -5,5 +5,9 @@ dotenv.config();
 const { startServer, app } = require('./api/index');
 const { models, sync } = require('./db/index');
 
-sync(true)
+const shouldForce = NODE_ENV === 'production'
+  ? false
+  : true;
+
+sync( shouldForce)
   .then(startServer);
